@@ -40,12 +40,7 @@ public class WishController {
     public ResponseEntity<?> findAllWishs(){
         try {
             RestTemplate restTemplate = new RestTemplate();
-            Object o = restTemplate.getForObject("htt://localhost:9200/wish-index/data/_search?pretty -H 'Content-Type: application/json' -d'\n" +
-                    "{\n" +
-                    "    \"sort\" : [\n" +
-                    "        { \"creation_date\" : {\"order\" : \"asc\"}}\n" +
-                    "    ]\n" +
-                    "}'", Object.class);
+            Object o = restTemplate.getForObject("http://localhost:9200/wish-index/data/_search", Object.class);
             return new ResponseEntity<>(o, HttpStatus.OK);
         } catch (RestClientException e) {
             e.printStackTrace();
